@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Upload File{% endblock %}
+
+{% block content %}
+<h1>Upload a File</h1>
+<form method="POST" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <div id="file-name-display">No file selected</div>
+    <button type="submit" class="btn">Upload</button>
+</form>
+
+<!-- Feedback de mensagens -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="flash-message flash-success">
+            {{ messages[0] }}
+        </div>
+    {% endif %}
+{% endwith %}
+{% endblock %}

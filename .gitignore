@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches
+.cache/
+*.log
+logs/
+
+# Virtual Environment
+venv/
+env/
+
+# Flask specific
+instance/
+*.pyc
+
+# Static files
+frontend/static/uploads/
+
+# Environment variables
+.env
+
+# Docker
+*.log
+docker-compose.override.yml

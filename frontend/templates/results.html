@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Results{% endblock %}
+
+{% block content %}
+<h1>Processing Results</h1>
+<p>File processed: <strong>{{ filename }}</strong></p>
+
+<div class="results-container">
+    <p>The extracted data will be displayed here.</p>
+</div>
+
+<a href="/" class="btn">Back to Upload</a>
+{% endblock %}
