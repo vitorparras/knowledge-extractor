@@ -4,10 +4,15 @@
 
 {% block content %}
 <h1>Processing Results</h1>
-<p>File processed: <strong>{{ filename }}</strong></p>
-
-<div class="results-container">
-    <p>The extracted data will be displayed here.</p>
+<div id="results-container">
+    <h2>Results</h2>
+    <pre id="results-output">
+        {% if results %}
+        {{ results | tojson(indent=2) }}
+        {% else %}
+        No results available.
+        {% endif %}
+    </pre>
 </div>
 
 <a href="/" class="btn">Back to Upload</a>

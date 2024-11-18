@@ -5,3 +5,4 @@ soundfile==0.12.1
 pandas==2.1.1
 numpy==1.26.0
 spacy==3.6.1
+PyPDF2==3.0.0

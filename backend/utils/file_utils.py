@@ -4,6 +4,8 @@ from werkzeug.utils import secure_filename
 def allowed_file(filename, allowed_extensions):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
 
+ALLOWED_EXTENSIONS = {'txt', 'wav', 'pdf'}
+
 def save_file(file, upload_folder):
     if not os.path.exists(upload_folder):
         os.makedirs(upload_folder)
