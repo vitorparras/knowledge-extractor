@@ -25,3 +25,88 @@ frontend/static/uploads/
 # Docker
 *.log
 docker-compose.override.yml
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Flask
+instance/
+*.db
+*.sqlite3
+
+# Secrets
+*.env
+config.py
+
+# Testing
+.pytest_cache/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Vue.js related
+node_modules/
+dist/
+*.log
+*.lock
+yarn-error.log
+yarn.lock
+npm-debug.log
+npm-debug.log.*
+
+# Logs and temporary files
+*.log
+*.out
+*.pid
+*.swp
+*.swo
+*.tmp
+*.bak
+*.orig
+
+# Editor specific
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS specific files
+.DS_Store
+Thumbs.db

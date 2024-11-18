@@ -1,18 +1,11 @@
-# Usando a imagem oficial do Python
-FROM python:3.11-slim
+# Dockerfile para Vue.js
+FROM node:16-alpine
 
-# Definir o diretório de trabalho
 WORKDIR /app
-
-# Copiar os arquivos necessários
-COPY requirements.txt .
+COPY package*.json ./
+RUN npm install
 COPY . .
+RUN npm run build
 
-# Instalar as dependências
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Expor a porta
-EXPOSE 5000
-
-# Comando para iniciar a aplicação
-CMD ["python", "app.py"]
+EXPOSE 8080
+CMD ["npm", "run", "serve"]

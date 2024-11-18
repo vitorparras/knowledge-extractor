@@ -7,15 +7,11 @@ services:
       - "5001:5001"
     volumes:
       - ./backend:/app
+      - /app/venv  # Exclui o ambiente virtual para evitar conflitos
     environment:
       - FLASK_ENV=development
 
   frontend:
-    build:
-      context: ./frontend
+    build: ./frontend
     ports:
-      - "5000:5000"
-    volumes:
-      - ./frontend:/app
-    environment:
-      - FLASK_ENV=development
+      - "8080:8080"
