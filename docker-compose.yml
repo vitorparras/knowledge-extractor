@@ -1,17 +1,27 @@
-version: "3.9"
+version: '3.8'
+
 services:
   backend:
     build:
       context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
     ports:
-      - "5001:5001"
+      - "5000:5000"
+    environment:
+      FLASK_ENV: development
+      MAX_CONTENT_LENGTH: 16 * 1024 * 1024
     volumes:
       - ./backend:/app
-      - /app/venv  # Exclui o ambiente virtual para evitar conflitos
-    environment:
-      - FLASK_ENV=development
+    restart: always
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
     ports:
       - "8080:8080"
+    stdin_open: true
+    tty: true
+    restart: always
