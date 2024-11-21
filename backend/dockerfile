@@ -1,43 +1,24 @@
-# Base image com Python 3.9
-FROM python:3.9
+# Use uma imagem base do Python
+FROM python:3.10-slim
 
-# Defina o diretório de trabalho
+# Configurar o diretório de trabalho
 WORKDIR /app
 
-# Instale dependências do sistema
-RUN apt-get update && apt-get install -y \
-    ffmpeg \
-    libsndfile1-dev \
-    libpulse-dev \
-    libasound2-dev \
-    build-essential \
-    poppler-utils \
-    libmagic1 \
-    gcc \
-    swig \
-    python3-dev \
-    libxml2-dev \
-    libxslt-dev \
-    zlib1g-dev \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+# Copiar os arquivos de dependência
+COPY requirements.txt .
 
-# Copie os arquivos de dependências
-COPY requirements.txt requirements.txt
+# Instalar dependências do sistema e Python
+RUN apt-get update && apt-get install -y ffmpeg libsndfile1 && \
+    rm -rf /var/lib/apt/lists/*
 
-# Instale as dependências do Python
-RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
-    && pip install --no-cache-dir -r requirements.txt
+# Instalar dependências do Python
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Corrija problemas conhecidos com a biblioteca sumy e collections.abc
-RUN sed -i 's/from collections import Sequence/from collections.abc import Sequence/' \
-    $(find /usr/local/lib/python3.9/site-packages/sumy/ -name '*.py')
-
-# Copie o restante do código
+# Copiar o restante do código
 COPY . .
 
-# Exponha a porta do backend
+# Expor a porta para a aplicação
 EXPOSE 5000
 
-# Comando para iniciar o servidor Gunicorn
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "--workers=2", "app:app"]
+# Comando para iniciar o servidor Flask com Gunicorn
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
