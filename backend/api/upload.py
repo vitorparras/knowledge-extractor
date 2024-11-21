@@ -1,6 +1,7 @@
 import os
 from flask import Blueprint, request, jsonify
 from audio_processing.whisper_transcription import transcribe_with_whisper
+from audio_processing.speech_recognition import transcribe_with_speech_recognition
 
 upload_bp = Blueprint("upload", __name__)
 
@@ -9,6 +10,7 @@ def upload_file():
     if "file" not in request.files:
         return jsonify({"error": "No file uploaded"}), 400
 
+    # Identificar o arquivo enviado
     file = request.files["file"]
     filename = file.filename
     file_extension = os.path.splitext(filename)[1].lower()
@@ -19,12 +21,22 @@ def upload_file():
     file.save(temp_path)
 
     try:
-        if file_extension in [".mp3", ".wav"]:
-            transcription = transcribe_with_whisper(temp_path)
-            os.remove(temp_path)  # Limpar o arquivo temporário
-            return jsonify({"transcription": transcription}), 200
-        else:
+        if file_extension not in [".mp3", ".wav"]:
             os.remove(temp_path)
             return jsonify({"message": f"Unsupported file type: {file_extension}"}), 400
+
+        # Transcrever usando todos os modelos
+        whisper_transcription = transcribe_with_whisper(temp_path)
+        speech_recognition_transcription = transcribe_with_speech_recognition(temp_path)
+
+        # Limpar o arquivo temporário
+        os.remove(temp_path)
+
+        # Retornar as transcrições de ambos os modelos
+        return jsonify({
+            "whisper_transcription": whisper_transcription,
+            "speech_recognition_transcription": speech_recognition_transcription
+        }), 200
     except Exception as e:
+        os.remove(temp_path)
         return jsonify({"error": str(e)}), 500
