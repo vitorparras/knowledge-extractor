@@ -7,6 +7,7 @@ from audio_processing.speech_recognition import convert_to_wav
 from audio_processing.wav2vec_transcription import transcribe_with_wav2vec
 
 from text_processing.spacy_summarization import summarize_with_spacy
+from text_processing.transformers_summarization import summarize_with_transformers
 
 import textract
 
@@ -48,10 +49,12 @@ def upload_file():
 
             # Resumir texto usando SpaCy
             spacy_summary = summarize_with_spacy(extracted_text)
-
+            transformers_summary = summarize_with_transformers(extracted_text)
+            
             os.remove(temp_path)
             return jsonify({
-                "spacy_summary": spacy_summary
+                "spacy_summary": spacy_summary,
+                "transformers_summary": transformers_summary
             }), 200
 
         else:
