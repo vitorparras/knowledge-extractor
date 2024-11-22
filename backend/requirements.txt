@@ -5,3 +5,4 @@ openai-whisper==20230314
 torch==2.0.1
 numpy==1.24.4
 SpeechRecognition==3.9.0
+vosk==0.3.45

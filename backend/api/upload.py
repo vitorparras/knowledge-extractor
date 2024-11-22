@@ -2,6 +2,8 @@ import os
 from flask import Blueprint, request, jsonify
 from audio_processing.whisper_transcription import transcribe_with_whisper
 from audio_processing.speech_recognition import transcribe_with_speech_recognition
+from audio_processing.vosk_transcription import transcribe_with_vosk
+from audio_processing.speech_recognition import convert_to_wav
 
 upload_bp = Blueprint("upload", __name__)
 
@@ -25,17 +27,31 @@ def upload_file():
             os.remove(temp_path)
             return jsonify({"message": f"Unsupported file type: {file_extension}"}), 400
 
-        # Transcrever usando todos os modelos
+        # Transcrever usando Whisper
         whisper_transcription = transcribe_with_whisper(temp_path)
+
+        # Transcrever usando SpeechRecognition
         speech_recognition_transcription = transcribe_with_speech_recognition(temp_path)
 
-        # Limpar o arquivo temporário
-        os.remove(temp_path)
+        # Garantir que o arquivo esteja em WAV para o Vosk
+        if file_extension != ".wav":
+            temp_wav_path = convert_to_wav(temp_path)
+        else:
+            temp_wav_path = temp_path
 
-        # Retornar as transcrições de ambos os modelos
+        # Transcrever usando Vosk
+        vosk_transcription = transcribe_with_vosk(temp_wav_path)
+
+        # Limpar arquivos temporários
+        os.remove(temp_path)
+        if temp_path != temp_wav_path:
+            os.remove(temp_wav_path)
+
+        # Retornar as transcrições
         return jsonify({
             "whisper_transcription": whisper_transcription,
-            "speech_recognition_transcription": speech_recognition_transcription
+            "speech_recognition_transcription": speech_recognition_transcription,
+            "vosk_transcription": vosk_transcription
         }), 200
     except Exception as e:
         os.remove(temp_path)
