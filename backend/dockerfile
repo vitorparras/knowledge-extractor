@@ -9,7 +9,9 @@ RUN apt-get update && apt-get install -y \
     ffmpeg \
     libsndfile1 \
     wget \
-    unzip && \
+    unzip \
+    poppler-utils \
+    libmagic1 && \
     rm -rf /var/lib/apt/lists/*
 
 # Copiar os arquivos de dependência
@@ -20,6 +22,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar o modelo Vosk manualmente baixado
 COPY models/vosk-model-small-pt /app/models/vosk-model-small-pt
+
+# Baixar o modelo SpaCy em português
+RUN python -m spacy download pt_core_news_sm
 
 # Copiar o restante do código para dentro do container
 COPY . .
