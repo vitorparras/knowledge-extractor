@@ -9,6 +9,7 @@ from audio_processing.wav2vec_transcription import transcribe_with_wav2vec
 from text_processing.spacy_summarization import summarize_with_spacy
 from text_processing.transformers_summarization import summarize_with_transformers
 from text_processing.bart_summarization import summarize_with_bart
+from text_processing.pegasus_summarization import summarize_with_pegasus
 
 import textract
 
@@ -52,12 +53,14 @@ def upload_file():
             spacy_summary = summarize_with_spacy(extracted_text)
             transformers_summary = summarize_with_transformers(extracted_text)
             bart_summary = summarize_with_bart(extracted_text)
-            
+            pegasus_summary = summarize_with_pegasus(extracted_text)
+             
             os.remove(temp_path)
             return jsonify({
                 "spacy_summary": spacy_summary,
                 "transformers_summary": transformers_summary,
-                "bart_summary": bart_summary
+                "bart_summary": bart_summary,
+                "pegasus_summary": pegasus_summary
             }), 200
 
         else:
