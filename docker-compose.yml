@@ -1,11 +1,11 @@
 version: '3.8'
 
 services:
-  backend:
+  knowledge-extractor-backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: backend
+    container_name: knowledge-extractor-backend
     ports:
       - "5000:5000"
     environment:
@@ -15,13 +15,11 @@ services:
       - ./backend:/app
     restart: always
 
-  frontend:
+  knowledge-extractor-frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: frontend
+    container_name: knowledge-extractor-frontend
     ports:
-      - "8080:8080"
-    stdin_open: true
-    tty: true
+      - "4200:80"
     restart: always
