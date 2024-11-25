@@ -1,0 +1,11 @@
+.results-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  mat-card {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 500px;
+  }
+  

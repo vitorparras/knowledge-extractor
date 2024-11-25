@@ -1,0 +1,13 @@
+Flask==2.3.2
+Flask-Cors==3.0.10
+gunicorn==21.0.1
+openai-whisper==20230314
+torch==2.0.1
+numpy==1.24.4
+SpeechRecognition~=3.8.1
+vosk==0.3.45
+librosa==0.10.0
+transformers==4.33.2
+spacy==3.6.0
+textract==1.6.5
+sentencepiece==0.1.99

@@ -1,0 +1,5 @@
+A inteligência artificial (IA) é um campo da ciência da computação que visa criar sistemas capazes de realizar tarefas que normalmente requerem inteligência humana. Entre essas tarefas estão o aprendizado, reconhecimento de padrões, solução de problemas e tomada de decisões. A IA tem avançado significativamente nas últimas décadas, impactando áreas como saúde, transporte, educação e indústria.
+
+Um exemplo notável de IA é o aprendizado de máquina, que permite que sistemas aprendam com dados e melhorem seu desempenho ao longo do tempo sem serem explicitamente programados. Outra área importante é o processamento de linguagem natural, que busca permitir que computadores compreendam, interpretem e gerem linguagem humana de forma significativa.
+
+Embora a IA ofereça inúmeras oportunidades, também apresenta desafios, como questões éticas relacionadas à privacidade, segurança e impacto no mercado de trabalho. À medida que a IA continua a evoluir, é essencial equilibrar seus benefícios e riscos para garantir que ela seja usada de forma responsável e em benefício de toda a sociedade.

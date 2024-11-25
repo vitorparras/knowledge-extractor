@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">Resultados</mat-toolbar>
+<div class="results-container">
+  <mat-card *ngIf="results">
+    <h2>Resultados da Análise</h2>
+    <pre>{{ results | json }}</pre>
+    <button mat-raised-button color="primary" routerLink="/upload">
+      Enviar outro arquivo
+    </button>
+  </mat-card>
+  <mat-card *ngIf="!results">
+    <h2>Nenhum resultado encontrado</h2>
+    <button mat-raised-button color="primary" routerLink="/upload">
+      Enviar arquivo
+    </button>
+  </mat-card>
+</div>

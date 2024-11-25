@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  knowledge-extractor-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: knowledge-extractor-backend
+    ports:
+      - "5000:5000"
+    environment:
+      FLASK_ENV: development
+      MAX_CONTENT_LENGTH: 16 * 1024 * 1024
+    volumes:
+      - ./backend:/app
+    restart: always
+    mem_limit: 12g 
+
+  knowledge-extractor-frontend:
+    build:
+      context: ./frontend
+    container_name: knowledge-extractor-frontend
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    restart: always
+    mem_limit: 8g 
+
+
+

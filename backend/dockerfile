@@ -1,0 +1,42 @@
+# Use uma imagem base do Python
+FROM python:3.10-slim
+
+# Configurar o diretório de trabalho
+WORKDIR /app
+
+# Instalar dependências do sistema necessárias
+RUN apt-get update && apt-get install -y \
+    ffmpeg \
+    libsndfile1 \
+    wget \
+    unzip \
+    poppler-utils \
+    libmagic1 \
+    libprotobuf-dev \
+    protobuf-compiler && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copiar os arquivos de dependência
+COPY requirements.txt .
+
+# Instalar as dependências do Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar o modelo Vosk manualmente baixado
+COPY models/vosk-model-small-pt /app/models/vosk-model-small-pt
+
+# Baixar o modelo SpaCy em português
+RUN python -m spacy download pt_core_news_sm
+
+# Instalar SentencePiece
+RUN pip install sentencepiece
+
+# Copiar o restante do código para dentro do container
+COPY . .
+
+# Expor a porta para a aplicação
+EXPOSE 5000
+
+# Comando para iniciar o servidor Flask com Gunicorn
+CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:5000", "--timeout", "11120", "app:app"]
+

@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">Analisador de Áudio e Texto</mat-toolbar>
+
+<div class="upload-container">
+  <mat-card>
+    <h2>Envie seu arquivo para análise</h2>
+
+    <input type="file" (change)="onFileSelected($event)" style="margin-bottom: 3em;" />
+    <mat-form-field appearance="outline">
+      <mat-label>Escolha o modelo</mat-label>
+      <mat-select [(value)]="model">
+        <mat-option value="all">Todos</mat-option>
+        <mat-option value="whisper">Whisper (Áudio)</mat-option>
+        <mat-option value="speech_recognition">SpeechRecognition (Áudio)</mat-option>
+        <mat-option value="vosk">Vosk (Áudio)</mat-option>
+        <mat-option value="wav2vec">Wav2Vec (Áudio)</mat-option>
+        <mat-option value="spacy">SpaCy (Texto)</mat-option>
+        <mat-option value="transformers">Transformers (Texto)</mat-option>
+        <mat-option value="bart">BART (Texto)</mat-option>
+        <mat-option value="pegasus">Pegasus (Texto)</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="uploadFile()">Enviar</button>
+
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  </mat-card>
+
+  <mat-card *ngIf="results" class="results-card">
+    <h2>Resultados</h2>
+    <div *ngFor="let key of objectKeys(results)">
+      <strong>{{ key }}</strong>: {{ results[key] }}
+    </div>
+  </mat-card>
+</div>
