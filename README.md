@@ -135,8 +135,8 @@ Este projeto foi configurado para ser executado integralmente com Docker, permit
 
 ## **Conjunto de Dados de Teste**
 O projeto inclui exemplos de arquivos para teste:
-- **Áudio:** Arquivos `.mp3` e `.wav` na pasta `test_data/audio/`.
-- **Texto:** Arquivos `.txt`, `.pdf` e `.docx` na pasta `test_data/text/`.
+- **Áudio:** Arquivos `.mp3` e `.wav` na pasta `testes`.
+- **Texto:** Arquivos `.txt`, `.pdf` e `.docx` na pasta `testes`.
 
 ---
 
